@@ -1,0 +1,30 @@
+package Async;
+
+import java.util.concurrent.Executor;
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.AsyncConfigurerSupport;
+import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+
+@Configuration
+@EnableAsync //서버에서 비동기 처리를 할 수 있도록 기능을 ON
+public class AsyncConfig extends AsyncConfigurerSupport{
+	
+	@Override
+	public Executor getAsyncExecutor() {
+		ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+		
+		executor.setCorePoolSize(10); //미리 스레드를 만들어 놓아 요청이 들어오면 바로 수행
+		
+		executor.setMaxPoolSize(100); // corePoolSize가 꽉차면 이후에는 스레드를 생성하여 수행, 
+									  // maxPoolSize만큼 스레드 증가
+		
+		executor.setQueueCapacity(50);// maxPoolSize가 꽉차면 이후에는 큐에 등록하여 순차적으로 수행, 
+									  // queueCapacity가 꽉차면 예외 발생
+		
+		executor.initialize();
+		return executor;
+	}
+
+}

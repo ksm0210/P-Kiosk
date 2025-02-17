@@ -1,0 +1,79 @@
+.line-style {
+    height: 170px;
+}
+
+#center-align {
+    margin: 0 auto;
+    width: 1600px;
+    position: relative;
+    top: -162px;
+}
+
+#center-align h1 {
+    background-image: url(images/logo_w.png);
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 202px;
+    height: 40px;
+    font-size: 0px;
+    line-height: 0px;
+    position: fixed;
+    top: 55px;
+    left: 5%;
+}
+
+.home-image {
+    background-image: url(images/home.png);
+    background-repeat: no-repeat;
+    width: 50px;
+    height: 37px;
+    display: inline-block;
+    position: fixed;
+    top: 55px;
+    right: 9%;
+    font-size: 0;
+}
+
+.block {
+    float: right;
+    margin: 3px 7px;
+    font-size : 30px;
+    position: fixed;
+    top: 48px;
+    right: 8%;
+}
+
+#font-style {
+    display: block;
+    font-size: 26px;
+    color: #666666;
+    font-weight: 500;
+    position: fixed;
+    top: 55px;
+    right: 2%;
+}
+
+#middle-align {
+    width: 98%;
+    height: 68%;
+    background-color: #25961d;
+    position: fixed;
+    top: 120px;
+}
+
+.qrfont {
+    font-size: 23px;
+    font-weight: bolder;
+    position: fixed;
+    top : 160px;
+    left: 28%;
+}
+
+#qrimg {
+    width: 75%;
+    height: 53%;
+    position: fixed;
+    top: 27%;
+    left: 13%;
+    
+}

@@ -1,0 +1,69 @@
+/* 결제 매뉴, 카드선택, 모바일 선택 css 통합*/
+
+.line-style {
+    height: 100px;
+  }
+
+  #top-style{
+    background-image: url(images/logo_w.png);
+    width: 200px;
+    height: 40px;
+    overflow: hidden;  /*overflow는 요소내 컨텐츠가 너무 커서 보여주기 힘들때 사용, -> 넘치는 부분 잘려서 보여지지X*/
+    position: fixed;
+    top: 55px;
+    right: 36%;
+  }
+
+
+  .home-image {
+    background-image: url(images/home.png);
+    background-repeat: no-repeat;
+    width: 50px;
+    height: 37px;
+    display: inline-block;
+    position: fixed;
+    top: 55px;
+    right: 9%;
+    font-size: 0;
+}
+
+.block {
+    float: right;
+    margin: 3px 7px;
+    font-size : 30px;
+    position: fixed;
+    top: 48px;
+    right: 8%;
+}
+
+#font-style {
+    display: block;
+    font-size: 26px;
+    color: #666666;
+    font-weight: 500;
+    position: fixed;
+    top: 55px;
+    right: 2%;
+}
+
+  #card-image {
+    width: 35%;
+    height: 300px;
+    position: fixed;
+    top: 30%;
+    left: 10%;
+  }
+
+  #mobile-image {
+    width: 35%;
+    height: 300px;
+    position: fixed;
+    top: 30%;
+    right: 10%;
+  }
+
+  #card-pick-img {
+    width: 100%;
+    position: fixed;
+    top: 30%;
+  }

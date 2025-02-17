@@ -1,0 +1,108 @@
+package com.example.demo;
+
+import java.sql.SQLException;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
+import DataBase.JDBC_DB_Repository;
+import DataBase.Login_Get;
+import DataBase.Register_Get;
+import Email.Email_Get;
+import Email.Email_Send;
+
+@Controller
+public class Page_Controller {
+	
+	
+	private PasswordEncoder passEncoder;
+	
+	@Autowired
+	private JDBC_DB_Repository db_rep;
+
+	
+	@RequestMapping(value = {"/" , "/index.jsp"})
+	public ModelAndView enterance() throws InterruptedException {
+		ModelAndView mav = new ModelAndView("index.jsp");
+        return mav;
+	}
+	
+	
+	@RequestMapping(value = "/login.do" , method = RequestMethod.POST)
+	public ModelAndView login(HttpServletRequest req) throws SQLException {
+		
+		Login_Get lg = new Login_Get();
+		lg.GetLogin(req);
+		boolean login_chk = db_rep.login(lg.getid(), lg.getPassword());
+		
+		ModelAndView mav1 = new ModelAndView("qrcode.jsp");
+		ModelAndView mav2 = new ModelAndView("menu.jsp");
+		
+		if(login_chk) {
+			System.out.println("아이디/비밀번호 틀림\n");
+			mav1.addObject("msg" , "ID/비밀번호 틀림");
+			mav1.addObject("url" , "index.jsp");
+			return mav1;
+		}
+		else {
+			System.out.println(lg.getid() + " 로그인 시도함");
+			return mav2;
+		}
+	}
+	
+	
+	@RequestMapping(value = "/registerin.do" , method = RequestMethod.POST)
+	public ModelAndView register_in(HttpServletRequest req) throws SQLException {
+		
+		Register_Get rg = new Register_Get();
+		rg.GetRegister(req);
+		
+		boolean chk = db_rep.overlap_check(rg.getid());
+		
+		ModelAndView mav1 = new ModelAndView("register.jsp");
+		ModelAndView mav2 = new ModelAndView("index.jsp");
+		
+		if(chk) {
+			// 중복 존재 O
+			System.out.println("Overlap Check 루틴 감지됨.\n");
+			mav1.addObject("msg", "이미 존재하는 Name 입니다.");
+			mav1.addObject("url", "register.jsp");
+			return mav1;
+		}
+		else {
+			// 중복 없음 X
+			String encry_id = rg.getid();
+			String encry_password = rg.getPassword();
+			String encry_age = rg.getAge();
+			String encry_sex = rg.getSex();
+			System.out.println(encry_id + " " + encry_password + " " + encry_age + " " 
+								+ encry_sex +"/n");
+			
+			db_rep.insert(encry_id , encry_password , encry_age , encry_sex);
+			mav2.addObject("msg", "가입신청이 완료되었습니다.");
+			mav2.addObject("url","index.jsp");
+			return mav2;
+		}
+	}
+	
+	
+	
+	@RequestMapping(value = "/getEmail.do" , method = RequestMethod.POST)
+	public ModelAndView GetEmail(HttpServletRequest req) throws AddressException, MessagingException{
+		
+		Email_Get eg = new Email_Get();
+		Email_Send es = new Email_Send();
+		eg.GetEmail(req);
+		es.Send(eg.getEmail(), eg.getName(), eg.getMsg());
+		ModelAndView mav = new ModelAndView("index.jsp");
+		return mav;
+	}
+}

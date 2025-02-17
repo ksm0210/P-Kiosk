@@ -1,0 +1,23 @@
+package DataBase;
+
+import javax.servlet.http.HttpServletRequest;
+
+public class Register_Get {
+	private String username , password;
+	
+	public void GetRegister(HttpServletRequest req) {
+		username = req.getParameter("username");
+		password = req.getParameter("password");
+		
+		System.out.println("New Register_in Request "+ username + " & " + password);
+	}
+	
+	public String getUsername() {
+		return username;
+	}
+	
+	
+	public String getPassword() {
+		return password;
+	}
+}

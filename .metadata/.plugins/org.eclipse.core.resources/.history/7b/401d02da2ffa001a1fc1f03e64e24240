@@ -1,0 +1,21 @@
+package Async;
+
+import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.ApplicationRunner;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.stereotype.Component;
+
+
+
+@Component
+public class Async_checker implements ApplicationRunner {
+	
+	@Override
+	@Async
+	public void run(ApplicationArguments args) throws Exception {
+		System.out.println("Async Start Check\n");
+		
+	}
+
+}
+

@@ -1,0 +1,20 @@
+.payment{
+    width: 100%;
+    height: 200px;
+    border:2px solid rgb(205, 206, 206);
+    overflow : auto;
+    position :fixed;
+    top:670px;
+    
+}
+
+#payment_button{
+    width : 15%;
+    height : 200px;
+    position: fixed;
+    top : 670px;
+    right : 0%;
+
+    font-size : 20px;
+    box-shadow: 0 3px 16px 0 rgba(24, 248, 43, 0.904), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
